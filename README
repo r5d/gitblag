@@ -1,0 +1,109 @@
+<!-- -*- mode: markdown; -*- -->
+
+# gitblag
+
+`gitblag` is a simple hook script to automatically send an email to an
+mailing list whenever a new entry/essay/post is pushed to a
+website/blog maintained using [git][git], the stupid content tracker.
+
+The subject and the body of the email is slurped from the commit
+message.
+
+`gitblag` is based on the `post-receive-email` script found in the
+contrib/hooks directory in the [Git SCM][git]'s source.
+
+[git]: http://git-scm.com/
+
+See 'Using gitblag' for info on how to install and use it.
+
+## Etymology
+
+The name `gitblag` resulted from copulative compounding of two
+obvious word stems -- `git` & `blag`.
+
+The word `blag`, a mispronunciation of `blog`, AFAIK, (first) appeared
+in the [xkcd comic][blag].
+
+[blag]: http://xkcd.com/148/
+
+## License
+
+`gitblag` is licensed under the GNU General Public License version 3
+or later. See COPYING for the full text of the license.
+
+## Using gitblag
+
+`gitblag` is meant to be used as a post-receive hook on a bare remote
+git repository of a website/blog. This hook is invoked on the remote
+repository when a `git push` happens on the local repository.
+
+The `gitblag` script does two things:
+
++  Sends an email to a mailing list when it finds a specifically
+   formatted `commit` (See 'Commit Message Format' section), on the
+   *master* branch.
+
++  Checks out the latest version of the working tree.
+
+For help setting up a website/blog maintained using git, read [Using
+Git to manage a web site][git-website].
+
+[git-website]: http://toroid.org/ams/git-website-howto
+
+### Installation
+
+Get a copy.
+
+	$ git clone http://rsiddharth.ninth.su/git/gitblag.git 
+
+Copy the script to the bare git repo of the website/blog.
+
+	$ cd /path/to/your/bare/repo/wobsite.git
+
+	$ cp /path/to/gitblag/gitblag.sh hooks/post-receive
+
+    $ chmod 755 hooks/post-receive
+
+Specify the location of the git maintained website/blog by changing
+the value of `GIT_WORK_TREE` variable in the `hooks/post-receive`
+script.
+
+### Configuration
+
+Go to the bare git repo of the website/blog.
+
+    $ cd /path/to/your/bare/repo/wobsite.git
+
+Set up the mailing list to which the script should send emails to.
+
+	$ git config --local --add hooks.mailinglist yourblag@list.tld
+
+Set up the email prefix. All emails will have their subjects prefixed
+with this prefix, "[Mailing List Prefix]" if emailprefix is not set.
+
+	$ git config --local --add hooks.emailprefix "[ BLAG PREFIX ]"
+
+Set up the mailing list footer. Edit the `description` file in the
+bare git repo.
+
+	$ editor description
+
+To set a custom `From` field, the hooks.envelopesender option needs to
+be set.
+
+    $ git config --local --add hooks.envelopesender from@address.tld
+
+### Commit Message Format
+
++ Start the commit message with `[NEW POST]` followed by text that
+will be used as the subject of the email.
+
++ Leave a blank line.
+
++ Write the body of the email.
+
+See the `sample-commit-msg.txt` file.
+
+## Contact
+
+ rsiddharth `<rsiddharth@ninthfloor.org>`
