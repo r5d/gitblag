@@ -60,7 +60,7 @@ Copy the script to the bare git repo of the website/blog.
 
 	$ cd /path/to/your/bare/repo/wobsite.git
 
-	$ cp /path/to/gitblag/gitblag.sh hooks/post-receive
+	$ cp /path/to/gitblag/src/gitblag.sh hooks/post-receive
 
     $ chmod 755 hooks/post-receive
 
