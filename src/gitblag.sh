@@ -49,6 +49,7 @@
 # Function to prepare for email generation. This whether an email
 # should even be generated.
 
+
 prep_for_email()
 {
 	# --- Arguments
@@ -118,6 +119,7 @@ generate_email()
 	generate_email_footer
 }
 
+
 generate_email_header()
 {
 
@@ -140,6 +142,7 @@ generate_email_header()
 	EOF
 }
 
+
 generate_email_footer()
 {
 	SPACE=" "
@@ -151,12 +154,14 @@ generate_email_footer()
 	EOF
 }
 
+
 generate_email_body()
 {
 	body=$(echo "$commit_msg" | sed '1,/^$/d')
 	
 	echo "$body"
 }
+
 
 send_mail()
 {
@@ -166,6 +171,7 @@ send_mail()
 		/usr/sbin/sendmail -t
 	fi
 }
+
 
 # ---------------------------- main()
 
