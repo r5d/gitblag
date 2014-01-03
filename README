@@ -2,8 +2,8 @@
 
 # gitblag
 
-`gitblag` is a simple hook script to automatically send an email to an
-mailing list whenever a new entry/essay/post is pushed to a
+`gitblag` is a simple hook script to automatically send an email to
+the readers whenever a new entry/essay/post is pushed to a
 website/blog maintained using [git][git], the stupid content tracker.
 
 The subject and the body of the email is slurped from the commit
@@ -26,11 +26,6 @@ in the [xkcd comic][blag].
 
 [blag]: http://xkcd.com/148/
 
-## License
-
-`gitblag` is licensed under the GNU General Public License version 3
-or later. See COPYING for the full text of the license.
-
 ## Using gitblag
 
 `gitblag` is meant to be used as a post-receive hook on a bare remote
@@ -39,9 +34,9 @@ repository when a `git push` happens on the local repository.
 
 The `gitblag` script does two things:
 
-+  Sends an email to a mailing list when it finds a specifically
-   formatted `commit` (See 'Commit Message Format' section), on the
-   *master* branch.
++  Sends an email to the readers when it finds a specifically formatted
+   `commit` (See 'Commit Message Format' section), on the `master`
+   branch.
 
 +  Checks out the latest version of the working tree.
 
@@ -70,26 +65,31 @@ script.
 
 ### Configuration
 
-Go to the bare git repo of the website/blog.
+1. Go to the remote bare git repo of the website/blog.
 
     $ cd /path/to/your/bare/repo/wobsite.git
 
-Set up the mailing list to which the script should send emails to.
+2. Set up the mailing list to which the script should send emails to.
 
 	$ git config --local --add hooks.mailinglist yourblag@list.tld
 
-Set up the email prefix. All emails will have their subjects prefixed
+  Or list the recipients' (the readers) email IDs, one email ID per
+  line, in a plain text file and inform git about it.
+
+    $ git config --local --add hooks.recipientlist /path/to/readerlist.txt
+
+3. Set up the email prefix. All emails will have their subjects prefixed
 with this prefix, "[Mailing List Prefix]" if emailprefix is not set.
 
 	$ git config --local --add hooks.emailprefix "[ BLAG PREFIX ]"
 
-Set up the mailing list footer. Edit the `description` file in the
+4. Set up the mailing list footer. Edit the `description` file in the
 bare git repo.
 
 	$ editor description
 
-To set a custom `From` field, the hooks.envelopesender option needs to
-be set.
+5. To set a custom `From` field, the hooks.envelopesender option needs
+to be set.
 
     $ git config --local --add hooks.envelopesender from@address.tld
 
@@ -103,6 +103,11 @@ will be used as the subject of the email.
 + Write the body of the email.
 
 See the `sample-commit-msg.txt` file.
+
+## License
+
+`gitblag` is licensed under the GNU General Public License version 3
+or later. See COPYING for the full text of the license.
 
 ## Contact
 
