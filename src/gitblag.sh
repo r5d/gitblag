@@ -213,11 +213,13 @@ else
 		if [ -n "$recipients" ]; then
 			# send to mailinglist.
 			generate_email $recipients | send_mail
+			echo "Sent email to $recipients"
 		fi
 
 		if [ -n "$recipientlist" ]; then
 			# send each email ID listed in recipient list file.
 			process_recipient_list
+			echo "Sent email to all recipients in $recipientlist"
 		fi
 	done
 fi
