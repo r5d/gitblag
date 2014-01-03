@@ -26,6 +26,9 @@
 # hooks.mailinglist
 #   This is the list that all pushes will go to; leave it blank to not send
 #   emails for every ref update.
+# hooks.recipientlist
+#   Set the path to the file which contains a list of recipients (one
+#   recipient per line).
 # hooks.envelopesender
 #   If set then the -f option is passed to sendmail to allow the envelope
 #   sender address to be set
@@ -93,8 +96,21 @@ prep_for_email()
 	return 1
 }
 
+
+process_recipient_list()
+{
+	# pick each recipient from list and send the email.
+	for recipient in $(cat $recipientlist)
+	do
+		generate_email $recipient | send_mail
+	done
+}
+
+
 generate_email()
 {
+	recipient=$1
+
 	generate_email_header
 		
 	generate_email_body
@@ -113,7 +129,7 @@ generate_email_header()
 	# --- Email (all stdout will be the email)
 	# Generate header
 	cat <<-EOF
-	To: $recipients
+	To: $recipient
 	Subject: ${emailprefix} $subject
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
@@ -171,6 +187,7 @@ then
 fi
 
 recipients=$(git config hooks.mailinglist)
+recipientlist=$(git config hooks.recipientlist)
 envelopesender=$(git config hooks.envelopesender)
 emailprefix=$(git config hooks.emailprefix || echo '[Mailing List Prefix]')
 
@@ -186,7 +203,16 @@ else
 	while read oldrev newrev refname
 	do
 		prep_for_email $oldrev $newrev $refname || continue
-		generate_email | send_mail
+
+		if [ -n "$recipients" ]; then
+			# send to mailinglist.
+			generate_email $recipients | send_mail
+		fi
+
+		if [ -n "$recipientlist" ]; then
+			# send each email ID listed in recipient list file.
+			process_recipient_list
+		fi
 	done
 fi
 
