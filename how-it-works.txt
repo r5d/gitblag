@@ -54,7 +54,7 @@ elit. Nam sagittis nisi dui.
                              |______________________________________|
 
 
-To: rsiddharth@ninthfloor.org
+To: joeblack@domainame.tld
 Subject: Foo Bar Post Subject goes here.
 X-Git-Refname: refs/heads/master
 X-Git-Reftype: branch
