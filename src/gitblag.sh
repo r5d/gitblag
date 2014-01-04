@@ -27,7 +27,7 @@
 #   This is the list that all pushes will go to; leave it blank to not send
 #   emails for every ref update.
 # hooks.recipientlist
-#   Set the path to the file which contains a list of recipients (one
+#   This points to a file which contains a list of recipients (one
 #   recipient per line).
 # hooks.envelopesender
 #   If set then the -f option is passed to sendmail to allow the envelope
