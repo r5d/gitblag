@@ -50,13 +50,13 @@ Git to manage a web site][git-website].
 
 Get a copy.
 
-	$ git clone http://rsiddharth.ninth.su/git/gitblag.git 
+    $ git clone http://rsiddharth.ninth.su/git/gitblag.git
 
 Copy the script to the bare git repo of the website/blog.
 
-	$ cd /path/to/your/bare/repo/wobsite.git
+    $ cd /path/to/your/bare/repo/wobsite.git
 
-	$ cp /path/to/gitblag/src/gitblag.sh hooks/post-receive
+    $ cp /path/to/gitblag/src/gitblag.sh hooks/post-receive
 
     $ chmod 755 hooks/post-receive
 
@@ -72,7 +72,7 @@ script.
 
 2. Set up the mailing list to which the script should send emails to.
 
-	    $ git config --local --add hooks.mailinglist yourblag@list.tld
+        $ git config --local --add hooks.mailinglist yourblag@list.tld
 
   Or list the recipients' (the readers) email IDs, one email ID per
   line, in a plain text file and inform git about it.
@@ -83,12 +83,12 @@ script.
 prefixed with this prefix &mdash; `[Mailing List Prefix]` &mdash; if
 emailprefix is not set.
 
-	    $ git config --local --add hooks.emailprefix "[ BLAG PREFIX ]"
+        $ git config --local --add hooks.emailprefix "[ BLAG PREFIX ]"
 
 4. Set up the mailing list footer. Edit the `description` file in the
 bare git repo.
 
-	    $ editor description
+        $ editor description
 
 5. To set a custom `From` field, the hooks.envelopesender option needs
 to be set.
