@@ -1,5 +1,3 @@
-<!-- -*- mode: markdown; -*- -->
-
 # gitblag
 
 `gitblag` is a simple hook script to automatically send an email to
@@ -74,24 +72,24 @@ script.
 
         $ git config --local --add hooks.mailinglist yourblag@list.tld
 
-  Or list the recipients' (the readers) email IDs, one email ID per
-  line, in a plain text file and inform git about it.
+   Or list the recipients' (the readers) email IDs, one email ID per
+   line, in a plain text file and inform git about it.
 
         $ git config --local --add hooks.recipientlist /path/to/readerlist.txt
 
 3. Set up the email prefix. All emails will have their subjects
-prefixed with this prefix &mdash; `[Mailing List Prefix]` &mdash; if
-emailprefix is not set.
+   prefixed with this prefix &mdash; `[Mailing List Prefix]` &mdash; if
+   emailprefix is not set.
 
         $ git config --local --add hooks.emailprefix "[ BLAG PREFIX ]"
 
 4. Set up the mailing list footer. Edit the `description` file in the
-bare git repo.
+   bare git repo.
 
         $ editor description
 
 5. To set a custom `From` field, the hooks.envelopesender option needs
-to be set.
+   to be set.
 
         $ git config --local --add hooks.envelopesender from@address.tld
 
